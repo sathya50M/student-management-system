@@ -1,0 +1,21 @@
+{
+  "students": [
+    {
+      "sname": "sathya",
+      "sid": "102",
+      "semail": "sathya@gmail.com",
+      "phNo": "6873239892",
+      "dept": "It",
+      "id": "1"
+    },
+    {
+      "sname": "Arun",
+      "sid": "45",
+      "semail": "arun@gmail.com",
+      "phNo": "9876543210",
+      "dept": "cse",
+      "id": "-7T5aDnzGwU"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
