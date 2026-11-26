@@ -29,7 +29,7 @@ const EditStudent = () => {
 
     useEffect(()=>{
       fetchStudent()
-    },[])
+    },[id])
 
     let handleChange = (e) =>{
         let {value , name} = e.target
