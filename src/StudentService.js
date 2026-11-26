@@ -1,51 +1,53 @@
-import api from "./api";
+import supabase from "./supabaseClient";
 
-export const getStudents = async () =>{
-    try{
-        let res = await api.get("/students");
-        return res.data;
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+export const getStudents = async () => {
+    const { data, error } = await supabase
+        .from("student")
+        .select("*");
 
-export const addStudent = async (payload) =>{
-    try{
-        let res = await api.post("/students",payload);
-        return res.data;   
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+    if (error) throw error;
+    return data;
+};
 
-export const deleteStudent = async (id) =>{
-    try{
-        let res = await api.delete(`/students/${id}`);
-        return res.data;   
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+export const addStudent = async (payload) => {
+    const { data, error } = await supabase
+        .from("student")
+        .insert(payload)
+        .select()
+        .single();
 
-export const getStudentsById = async (id) =>{
-    try{
-        let res = await api.get(`/students/${id}`);
-        return res.data;   
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+    if (error) throw error;
+    return data;
+};
 
-export const updateStudent = async (id,payload) =>{
-    try{
-        let res = await api.put(`/students/${id}`,payload);
-        return res.data;   
-    }
-    catch(err){
-        console.log(err);
-    }
-}
+export const deleteStudent = async (id) => {
+    const { error } = await supabase
+        .from("student")
+        .delete()
+        .eq("id", id);
+
+    if (error) throw error;
+};
+
+export const getStudentsById = async (id) => {
+    const { data, error } = await supabase
+        .from("student")
+        .select("*")
+        .eq("id", id)
+        .single();
+
+    if (error) throw error;
+    return data;
+};
+
+export const updateStudent = async (id, payload) => {
+    const { data, error } = await supabase
+        .from("student")
+        .update(payload)
+        .eq("id", id)
+        .select()
+        .single();
+
+    if (error) throw error;
+    return data;
+};
